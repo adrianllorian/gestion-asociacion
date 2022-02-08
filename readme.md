@@ -1,5 +1,5 @@
 <h1>Aplicacion de gestion de Socios Microservícios Spring Boot REST</h1>
-<p>Una apliacion en la cual permite gestinoar socios de una asociacion.</p>
+<p>Una apliacion en la cual permite gestionar socios de una asociación.</p>
 
 <h2>Tecnológia</h2>
 
