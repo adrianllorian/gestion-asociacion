@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asociacion</title>
+    <!--Css Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!--Js Bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/index.css">
+
+
+</head>
+
+<body class="fluid-container">
+    <!--Menu de arriba-->
+    <div id="pagina" style="display: none;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Asociación</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+
+
+
+                    <li class="nav-item">
+                        <a id="opcionBuscar" class="nav-link" style="cursor: pointer">Cambiar a Buscar Aportación</a>
+
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" id="formularioBuscador">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar Usuario" aria-label="Search"
+                        id="buscadorUsuario">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar Aportacion"
+                        aria-label="Search" id="buscadorAportacion" style="display: none;">
+                </form>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a id="cerrarSesion" class="text-danger nav-link" style="cursor: pointer">Cerrar Sesion</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+        <!--Fin del menu-->
+
+
+
+        <div class="submenu">
+            <div class="row display-flex py-4">
+                <div class="mr-auto px-4" id="cajaTotalAcumulacion" style="display: none;">
+
+                    <h4><a class="font-weight-bold">Total Aportación Acumulada: </a><a id="TotalAportacionUsuario"
+                            class="text-success"></a><a class="text-success">€</a></h4>
+
+                </div>
+                <div class="mr-auto px-4" id="cajaTotalUsuarios" style="display: none;">
+
+                    <h4><a class="font-weight-bold">Total Número de Socios: </a><a id="TotalNumeroUsuarios"
+                            class="text-success"></a> <i class="fa fa-users text-success"></i></h4>
+
+                </div>
+                <div class="ml-auto px-4">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#modalAddUsuario"
+                        id="abrirModalCrearUsuario" style="display: none;"> <a>+ Crear
+                            Socio</a><a>&nbsp;&nbsp;&nbsp;</a><i class="fa fa-user"></i></button>
+
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modalCambiarContraseña"
+                        id="abrirModalCambiarContraseña" style="display: none;"> <a>Cambiar
+                            Contraseña</a><a>&nbsp;&nbsp;&nbsp;</a><i class="fa fa-key"></i></button>
+                </div>
+            </div>
+        </div> <!-- Fin del submenu-->
+
+
+
+        <div id="moduloTablaSocios-Admin" class="row scrollTablaAdmin" style="display:none;">
+            <div class="d-flex justify-content-center mx-4 my-2">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Ver Socio</th>
+                            <th>Concepto</th>
+                            <th>Cambiar aportacion</th>
+                            <th>Aportacion</th>
+                            <th>Borrar</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTablaSocios-Admin">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Fin del modulo de la tabla usuarios de Admin-->
+
+
+        <div id="moduloTablaAportaciones-Admin" class="row scrollTablaAdmin" style="display:none;">
+            <div class="d-flex justify-content-center mx-4 my-2">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Concepto</th>
+                            <th>Estado</th>
+                            <th>Aportacion</th>
+                            <th>Ver Usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTablaAportacionesPrincipal">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Fin del modulo de la tabla Aportaciones de Admin-->
+
+        <div id="moduloTablaUsuario-Usuario" class="row mx-4 my-2" style="display:none;">
+            <div>
+
+                <div class="row mb-3">
+
+                    <h4>Mis datos:</h4>
+
+                </div>
+
+                <dl class="row d-flex">
+                    <dt class="col-sm-3 col-md-3">Nombre</dt>
+                    <dd class="col-sm-9 col-md-3">
+                        <p id="NombreListaUsuario"></p>
+                    </dd>
+                    <dt class="col-sm-3 col-md-3">Apellidos</dt>
+                    <dd class="col-sm-9 col-md-3">
+                        <p id="ApellidosListaUsuario"></p>
+                    </dd>
+                    <dt class="col-sm-3 col-md-3">DNI</dt>
+                    <dd class="col-sm-9 col-md-3">
+                        <p id="DNIListaUsuario"></p>
+                    </dd>
+                    <dt class="col-sm-3 col-md-3">Domicilio</dt>
+                    <dd class="col-sm-9 col-md-3">
+                        <p id="DomicilioListaUsuario"></p>
+                    </dd>
+                    <dt class="col-sm-3 col-md-3">Municipio</dt>
+                    <dd class="col-sm-9 col-md-3">
+                        <p id="MunicipioListaUsuario"></p>
+                    </dd>
+                    <dt class="col-sm-3 col-md-3">Provincia</dt>
+                    <dd class="col-sm-9 col-md-3">
+                        <p id="ProvinciaListaUsuario"></p>
+                    </dd>
+                    </dd>
+                </dl>
+            </div>
+
+            <div>
+                <div class="row mt-5 mb-3">
+                    <h4>Mis Aportaciones:</h4>
+                </div>
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Descripción</th>
+                                <th>Estado</th>
+                                <th>Aportación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTablaUsuario-Usuario">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--FOOTER-->
+    <div class="row mx-4 py-4">
+
+        <div class="row" id="cajaAlertaContrasenaUsuarioCorrecto" style="display:none;">
+            <h4 class="text-success"> <i class="fa fa-check-circle-o text-success mr-2 fa-2x"></i>CONTRASEÑA GUARDADADA
+                CORRECTA</h4>
+        </div>
+        <div class="row" id="cajaAlertaContrasenaUsuarioIncorrecta" style="display:none;">
+            <h4 class="text-danger"><i class="fa fa-ban text-danger mr-2 fa-2x"></i>ERROR GUARDADO CONTRASEÑA</h4>
+        </div>
+        <div class="row" id="cajaFooter">
+            <p class="text-muted">®Desarrolado por: <a class="text-primary" href="https://elclientenotienelarazon.com"
+                    target="_blank" rel="follow">Adrián</a></p>
+        </div>
+
+        <!--FINAL DEL FOOTER-->
+    </div>
+    <!--Fin de id="pagina"-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Modal LOGIN -->
+    <div id="loginModal" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center">Asociación</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group ">
+                            <h5 class="text-muted mt-3 mb-3">Login</h5>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i
+                                        class="fa fa-user fa-2x mr-3 mt-1 text-muted"></i></span>
+                                <input id="dni" type="text" class="form-control" name="dni" placeholder="DNI"
+                                    required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i
+                                        class="fa fa-lock fa-2x mr-3 mt-1 text-muted"></i></span>
+                                <input id="pass" type="password" class="form-control" name="pass"
+                                    placeholder="Contraseña" required="required">
+                            </div>
+                        </div>
+                        <div id="MensajeErrorLogin">
+
+                        </div>
+                        <div class="form-group">
+
+                            <ul style="list-style:none">
+                                <li><span class="text-muted">Credenciales de Prueba:</span></li>
+                                <ul style="list-style:none">
+
+                                    <li><span class="text-muted">Administrador</span></li>
+                                    <li>
+                                        <ul style="list-style:none">
+                                            <li><span class="text-muted">DNI: 00000000Z</span></li>
+                                            <li><span class="text-muted">Contraseña: admin</span></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><span class="text-muted">Usuario</span></li>
+                                    <li>
+                                        <ul style="list-style:none">
+                                            <li><span class="text-muted">DNI: 00000001Z</span></li>
+                                            <li><span class="text-muted">Contraseña: user</span></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                               
+                            </ul>
+                            <span class="text-warning">*Los datos serán eliminados todos los dias</span>
+
+                        </div>
+                        <div class="form-group">
+                            <button id="botonLogin" type="button"
+                                class="btn btn-dark btn-block btn-lg mt-5">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--MODAL VER USUARIO-->
+
+    <div class="modal fade bd-example-modal-lg" id="modalVerUsuario" tabindex="-1" role="dialog"
+        aria-labelledby="modalVerUsuario" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Datos de Usuario</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row px-3 pb-3">
+                        <h4 class=" ml-auto"><a>Total Aportacion Acumulada: </a><a id="verUsuarioTotalAportacionUsuario"
+                                class="text-success"></a><a class="text-success">€</a></h4>
+                    </div>
+                    <div class="row">
+                        <div id="verUsuarioColIzq"
+                            class="col-xs-12 col-sm-12 col-md-6 mr-auto mb-5 mb-lg-0 border-right">
+                            <ul class="list-group list-group-flush" id="listaDatosUsuario">
+                                <li class="list-group-item d-flex justify-content-between"><a>DNI:</a><a
+                                        id="verUsuarioDni" class="font-weight-bold"></a></li>
+                                <li class="list-group-item d-flex justify-content-between"><a>Nombre:</a><a
+                                        id="verUsuarioNombre" class="font-weight-bold"></a></li>
+                                <li class="list-group-item d-flex justify-content-between"><a>Apellidos:</a><a
+                                        id="verUsuarioApellidos" class="font-weight-bold"></a></li>
+                                <li class="list-group-item d-flex justify-content-between"><a>Telefono:</a><a
+                                        id="verUsuarioTelefono" class="font-weight-bold"></a></li>
+                                <li class="list-group-item d-flex justify-content-between"><a>Domicilio:</a><a
+                                        id="verUsuarioDomicilio" class="font-weight-bold"></a></li>
+                                <li class="list-group-item d-flex justify-content-between"><a>Municipio:</a><a
+                                        id="verUsuarioMunicipio" class="font-weight-bold"></a></li>
+                                <li class="list-group-item d-flex justify-content-between"><a>Provincia:</a><a
+                                        id="verUsuarioProvincia" class="font-weight-bold"></a></li>
+                                <li class="list-group-item d-flex justify-content-between"><a>Permisos:</a><a
+                                        id="verUsuarioRol" class="font-weight-bold"></a></li>
+                            </ul>
+
+
+                        </div>
+                        <div id="verUsuarioColDer" class="col-xs-12 col-sm-12 col-md-6 scroll">
+                            <table class="table table-sm mt-4" style="border-top:0px !important;">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Descripción</th>
+                                        <th>Aportación</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpo-anotacion">
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="row d-flex mt-4 py-4 px-4">
+
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Foto DNI Frontal:</h5>
+                                    <img id="fotoDelantera" class="card-img-bottom" alt="Foto DNI frontal no cargada">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Foto DNI Trasera:</h5>
+                                    <img id="fotoTrasera" class="card-img-bottom" alt="Foto DNI trasera no cargada">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- MODAL AÑADIR USUARIO-->
+
+    <div class="modal fade bd-example-modal-lg" id="modalAddUsuario" tabindex="-1" role="dialog"
+        aria-labelledby="modalAddUsuario" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="tituloFormularioUsuario">Añadir Usuario</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row px-3">
+                        <form class="form-inline justify-content-around">
+                            <div class="form-group mb-3 mr-3">
+                                <label for="NombreCrearUsuario" class="mr-2">Nombre</label>
+                                <input type="text" class="form-control" id="NombreCrearUsuario"
+                                    aria-describedby="NombreCrearUsuario" placeholder="Nombre" maxlength="32"
+                                    pattern="[A-Za-z]">
+                            </div>
+                            <div class="form-group mb-3 mr-3">
+                                <label for="ApellidoCrearUsuario" class="mr-2">Apellidos</label>
+                                <input type="text" class="form-control" id="ApellidoCrearUsuario"
+                                    aria-describedby="ApellidoCrearUsuario" placeholder="Apellido" maxlength="32">
+                            </div>
+                            <div class="form-group mb-3 mr-3">
+                                <label for="DniCrearUsuario" class="mr-2">DNI</label>
+                                <input type="text" class="form-control" id="DniCrearUsuario"
+                                    aria-describedby="DniCrearUsuario" placeholder="DNI" maxlength="9">
+                            </div>
+                            <div class="form-group mb-3 mr-3">
+                                <label for="TelefonoCrearUsuario" class="mr-2">Teléfono</label>
+                                <input type="text" class="form-control" id="TelefonoCrearUsuario"
+                                    aria-describedby="TelefonoCrearUsuario" placeholder="Teléfono" maxlength="13">
+                            </div>
+                            <div class="form-group mb-3 mr-3">
+                                <label for="DomicilioCrearUsuario" class="mr-2">Domicilio</label>
+                                <input type="text" class="form-control" id="DomicilioCrearUsuario"
+                                    aria-describedby="DomicilioCrearUsuario" placeholder="Domicilio" maxlength="250">
+                            </div>
+                            <div class="form-group mb-3 mr-3">
+                                <label for="MunicipioCrearUsuario" class="mr-2">Municipio</label>
+                                <input type="text" class="form-control" id="MunicipioCrearUsuario"
+                                    aria-describedby="MunicipioCrearUsuario" placeholder="Municipio" maxlength="250">
+                            </div>
+                            <div class="form-group mb-3 mr-3">
+                                <label for="ProvinciaCrearUsuario" class="mr-2">Provincia</label>
+                                <input type="text" class="form-control" id="ProvinciaCrearUsuario"
+                                    aria-describedby="ProvinciaCrearUsuario" placeholder="Provincia" maxlength="250">
+                            </div>
+                            <div class="form-group mb-3 mr-3 mt-3" id="cajaContraseñaFormulario">
+                                <label for="ContraseñaCrearUsuario" class="mr-2">Contraseña</label>
+                                <input type="text" class="form-control" id="ContraseñaCrearUsuario"
+                                    aria-describedby="ContraseñaCrearUsuario" placeholder="Contraseña">
+                                <small class="ml-4"><a class="text-primary" id="generarContrasena" type="button">Generar
+                                        Contraseña</a></small>
+                            </div>
+
+
+                            <div class="form-group mb-3 mr-3">
+                                <div class="form-check mr-4">
+                                    <label>Permisos:</label>
+                                </div>
+                                <div class="form-group mr-4">
+                                    <input class="form-check-input" type="radio" name="permisos" id="UsuarioCheck"
+                                        value="user" checked>
+                                    <label class="form-check-label" for="Usuario">
+                                        Usuario
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-check-input" type="radio" name="permisos" id="AdminCheck"
+                                        value="admin">
+                                    <label class="form-check-label" for="Admin">
+                                        Administrador
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-check" style="display: none;" id="datosVaciosformulario">
+                                <p class="text-warning">Faltan datos en el formulario</p>
+                            </div>
+
+                            <div class="form-group mt-4 py-4 px-4 d-flex justify-content-around">
+                                <h4 for="inputFotoDniDelantera">Foto Dni Delantera</h4>
+                                <div class="HoverDiv">
+                                    <img accept="image/*" id="delante" style="width: 10em; height: 6.30em;">
+                                </div>
+                                <input type="file" class="form-control-file" id="inputFotoDniDelantera"
+                                    onchange="document.getElementById('delante').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+
+                            <div class="form-group mt-4 py-4 px-4 d-flex justify-content-around">
+                                <h4 for="inputFotoDniTrasera" class="mr-sm-4">Foto Dni Trasera</h4>
+                                <img src="" accept="image/*" id="atras" style="width: 10em; height: 6.30em;">
+                                <input type="file" class="form-control-file" id="inputFotoDniTrasera"
+                                    onchange="document.getElementById('atras').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row d-flex mt-4 py-4 px-4">
+                    <button class="btn btn-success" id="botonCrearUsuario" style="display: none;">Guardar
+                        Usuario</button>
+                    <button class="btn btn-success" id="editarCrearUsuario" style="display: none;">Editar
+                        Usuario</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modalConfirmarBorrar" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Asociación</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group text-center">
+                            <h5>¿Deseas borrar el usuario?</h5>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group" id="mostrarBorrarUsuario">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group d-flex justify-content-around">
+                                <a class="btn btn-primary" id="cancelarBorrarUsuario">Cancelar</a>
+                                <a class="btn btn-danger" id="confirmarBorrarUsuario">Borrar</a>
+                            </div>
+                        </div>
+                        <div id="MensajeErrorLogin">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalCambiarContraseña" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Asociación</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group text-center">
+                            <h5>¿Deseas cambiar la contraseña?</h5>
+                        </div>
+                        <div class="form-group">
+                            <label for="CambiarContrasena">Escribe aquí tu nueva contraseña</label>
+                            <input class="form-control" type="password" id="CambiarContrasena"
+                                name="CambiarContrasena" />
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group d-flex justify-content-around">
+                                <a class="btn btn-danger" id="cancelarCambiarContraseña" data-dismiss="modal"
+                                    aria-label="Close">Cancelar</a>
+                                <a class="btn btn-success" id="confirmarCambiarContraseña">Confirmar</a>
+                            </div>
+                        </div>
+                        <div id="MensajeErrorLogin">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="JavaScript/Login.js"></script>
+    <script src="JavaScript/Usuario.js"></script>
+    <script src="JavaScript/Aportaciones.js"></script>
+    <script src="JavaScript/CambiarContrasena.js"></script>
+    <script src="JavaScript/Menu.js"></script>
+    <script src="JavaScript/ValidarFormularioUsuario.js"></script>
+    <script src="JavaScript/Buscador.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+#pantallaAportacion:focus {
+    outline: none !important;
+    border-color: rgb(136, 194, 255);
+    box-shadow: 0 0 10px #719ECE;
+}
+
+#pantallaAportacion {
+    border: solid 1px rgb(221, 226, 231);
+    text-align: rigth;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.scroll {
+    margin-top: -20px;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+
+
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.scrollTablaAdmin {
+    position: relative;
+    height: 500px;
+    overflow: auto;
+    display: block;
+    
+}
+
+#moduloTablaUsuario-Usuario{
+    height: 530px;
+}
+
+
+
+#cajaFooter {
+    box-shadow: 10px 0px 0px 0px rgb(231, 231, 231),
+}
+
+@media screen and (max-width: 767px) {
+  #moduloTablaUsuario-Usuario{
+    display: block;
+    position: relative;
+    height: 260px;
+    overflow: auto;
+  }
+    
+    
+}
+
+#delante:hover{
+    transform: scale(3);
+}
+
+#atras:hover{
+    transform: scale(3);
+}
+ 
