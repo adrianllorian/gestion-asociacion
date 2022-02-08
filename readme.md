@@ -1,4 +1,4 @@
-<h1>Aplicacion de gestion de Socios Asíncrona</h1>
+<h1>Aplicacion de gestion de Socios Microservícios Spring Boot REST</h1>
 <p>Una apliacion en la cual permite gestinoar socios de una asociacion.</p>
 
 <h2>Tecnológia</h2>
